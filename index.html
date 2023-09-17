@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Salesforce Practice Exam</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+
+    <style>
+        :root {
+            --number-todo: whitesmoke;
+            --number-active: rgb(94, 146, 205);
+            --number-correct: rgb(102, 197, 122);
+            --number-wrong: rgb(228, 122, 122);
+            --number-for-review: rgb(224, 228, 122);
+        }
+        html, * {
+            padding: 0;
+            margin: 0;
+            box-sizing: border-box;
+        }
+        .content {
+            background-color: #e9ecef;
+            padding: 10px 15px;
+            margin-top: 10px;
+            border-radius: 10px;
+        }
+        .numbers {
+            flex-wrap: wrap;
+            /* padding-bottom: 10px; */
+        }
+        .number {
+            border: 1px solid black;
+            background-color: var(--number-todo);
+            min-width: 20px;
+            width: auto;
+            text-align: center;
+            cursor: pointer;
+            padding: 0 4px;
+        }
+        .number.active, .box.active {
+            background-color: var(--number-active);
+        }
+        .number.correct, .box.correct {
+            background-color: var(--number-correct);
+        }
+        .number.wrong, .box.wrong {
+            background-color: var(--number-wrong);
+        }
+        .number.for-review, .box.for-review {
+            background-color: var(--number-for-review);
+        }
+        .box {
+            border: 1px solid gray;
+            width: 20px;
+            height: 100%;
+        }
+    </style>
+</head>
+<body>
+    <main class="container mt-4 px-5">
+        <section class="title-timer">
+            <div class="d-flex justify-content-between align-items-center" style="font-weight: bold; font-size: 1.8rem;">
+                <div>SALESFORCE PRACTICE EXAM</div>
+                <div class="time text-warning">
+                    <span class="hour">12</span>:<span class="minute">59</span>:<span class="second">30</span>
+                </div>
+            </div>
+        </section>
+        <section class="section-numbers">
+            <div class="row">
+                <div class="col-xl-4 col-md-5 col-sm-12 px-3 pt-2">
+                    <div class="content legend row border h-100">
+                        <div class="col-12">
+                            <h5>LEGEND</h5>
+                        </div>
+                        <div class="col-md-6 col-sm-12 mt-1 d-flex justify-content-start gap-2 align-items-center">
+                            <div class="box todo">&nbsp;</div>
+                            <label for="">TO DO</label>
+                        </div>
+                        <div class="col-md-6 col-sm-12 mt-1 d-flex justify-content-start gap-2 align-items-center">
+                            <div class="box active">&nbsp;</div>
+                            <label for="">TO DO</label>
+                        </div>
+                        <div class="col-md-6 col-sm-12 mt-1 d-flex justify-content-start gap-2 align-items-center">
+                            <div class="box correct">&nbsp;</div>
+                            <label for="">CORRECT</label>
+                        </div>
+                        <div class="col-md-6 col-sm-12 mt-1 d-flex justify-content-start gap-2 align-items-center">
+                            <div class="box wrong">&nbsp;</div>
+                            <label for="">WRONG</label>
+                        </div>
+                        <div class="col-md-6 col-sm-12 mt-1 d-flex justify-content-start gap-2 align-items-center">
+                            <div class="box for-review">&nbsp;</div>
+                            <label for="">FOR REVIEW</label>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xl-8 col-md-7 col-sm-12 px-3 pt-2">
+                    <div class="content numbers row h-100">
+                        <div class="col-12">
+                            <h5>QUESTIONS</h5>
+                        </div>
+                        <div class="col-12">
+                            <div class="numbers d-flex justify-content-start align-items-center gap-1">
+                                <div class="number active">1</div>
+                                <div class="number correct">2</div>
+                                <div class="number">3</div>
+                                <div class="number">4</div>
+                                <div class="number">5</div>
+                                <div class="number">6</div>
+                                <div class="number">7</div>
+                                <div class="number">8</div>
+                                <div class="number">9</div>
+                                <div class="number">10</div>
+                                <div class="number">11</div>
+                                <div class="number">12</div>
+                                <div class="number">13</div>
+                                <div class="number">14</div>
+                                <div class="number">15</div>
+                                <div class="number">16</div>
+                                <div class="number">17</div>
+                                <div class="number">18</div>
+                                <div class="number">19</div>
+                                <div class="number">20</div>
+                                <div class="number">21</div>
+                                <div class="number">22</div>
+                                <div class="number">23</div>
+                                <div class="number">24</div>
+                                <div class="number">25</div>
+                                <div class="number">26</div>
+                                <div class="number">27</div>
+                                <div class="number">28</div>
+                                <div class="number">29</div>
+                                <div class="number">30</div>
+                                <div class="number">31</div>
+                                <div class="number">32</div>
+                                <div class="number">33</div>
+                                <div class="number">34</div>
+                                <div class="number">35</div>
+                                <div class="number">36</div>
+                                <div class="number">37</div>
+                                <div class="number">38</div>
+                                <div class="number">39</div>
+                                <div class="number">40</div>
+                                <div class="number">41</div>
+                                <div class="number">42</div>
+                                <div class="number">43</div>
+                                <div class="number">44</div>
+                                <div class="number">45</div>
+                                <div class="number">46</div>
+                                <div class="number">47</div>
+                                <div class="number">48</div>
+                                <div class="number">49</div>
+                                <div class="number">50</div>
+                                <div class="number">51</div>
+                                <div class="number">52</div>
+                                <div class="number">53</div>
+                                <div class="number">54</div>
+                                <div class="number">55</div>
+                                <div class="number">56</div>
+                                <div class="number">57</div>
+                                <div class="number">58</div>
+                                <div class="number">59</div>
+                                <div class="number">60</div>
+                                <div class="number">61</div>
+                                <div class="number">62</div>
+                                <div class="number">63</div>
+                                <div class="number wrong">64</div>
+                                <div class="number for-review">65</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section class="section-questions mt-3">
+            <div class="content questions row">
+                <div class="col-12">
+                    <p class="question">1. Lorem ipsum dolor, sit amet consectetur adipisicing elit. Harum ex enim, delectus sunt ipsam sint deleniti! Amet non repellat, necessitatibus, facilis iusto deleniti sed rerum, odio quae officiis ad vero? <b>Choose 2 anwers.</b></p>
+                    <hr>
+                    <div class="options">
+                        <div class="option d-flex align-items-center justify-content-start">
+                            <label for=""><input type="checkbox" name="option" id="option1"><span class="px-2">A. Option 1</span></label>
+                        </div>
+                        <div class="option d-flex align-items-center justify-content-start">
+                            <label for=""><input type="checkbox" name="option" id="option2"><span class="px-2">B. Option 2</span></label>
+                        </div>
+                        <div class="option d-flex align-items-center justify-content-start">
+                            <label for=""><input type="checkbox" name="option" id="option3"><span class="px-2">C. Option 3</span></label>
+                        </div>
+                        <div class="option d-flex align-items-center justify-content-start">
+                            <label for=""><input type="checkbox" name="option" id="option4"><span class="px-2">D. Option 4</span></label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section class="section-buttons">
+            <div class="row mt-3">
+                <div class="col-12 text-end">
+                    <button class="btn btn-warning">MARK AS FOR REVIEW</button>
+                    <button class="btn btn-primary">PREVIOUS</button>
+                    <button class="btn btn-primary">NEXT</button>
+                    <button class="btn btn-success">SUBMIT</button>
+                </div>
+            </div>
+        </section>
+    </main>
+
+
+    <script>
+        $(document).ready(function() {
+            function playTimer() {
+                let hour = 0, minute = 0, second = 0;
+            }
+
+            // alert("LOL")
+        })
+    </script>
+</body>
+</html>

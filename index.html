@@ -35,11 +35,12 @@
         .number {
             border: 1px solid black;
             background-color: var(--number-todo);
-            min-width: 20px;
+            min-width: 30px;
             width: auto;
             text-align: center;
             cursor: pointer;
-            padding: 0 4px;
+            padding: 2px 5px;
+            height: 100%;
         }
         .number.active, .box.active {
             background-color: var(--number-active);
@@ -56,7 +57,17 @@
         .box {
             border: 1px solid gray;
             width: 20px;
-            height: 100%;
+            height: 20px;
+        }
+        .questions {
+            font-size: 1.1rem;
+        }
+        .answer {
+            font-weight: bold;
+        }
+        input.option {
+            height: 15px;
+            width: 20px;
         }
     </style>
 </head>
@@ -72,39 +83,12 @@
         </section>
         <section class="section-numbers">
             <div class="row">
-                <div class="col-xl-4 col-md-5 col-sm-12 px-3 pt-2">
-                    <div class="content legend row border h-100">
-                        <div class="col-12">
-                            <h5>LEGEND</h5>
-                        </div>
-                        <div class="col-md-6 col-sm-12 mt-1 d-flex justify-content-start gap-2 align-items-center">
-                            <div class="box todo">&nbsp;</div>
-                            <label for="">TO DO</label>
-                        </div>
-                        <div class="col-md-6 col-sm-12 mt-1 d-flex justify-content-start gap-2 align-items-center">
-                            <div class="box active">&nbsp;</div>
-                            <label for="">TO DO</label>
-                        </div>
-                        <div class="col-md-6 col-sm-12 mt-1 d-flex justify-content-start gap-2 align-items-center">
-                            <div class="box correct">&nbsp;</div>
-                            <label for="">CORRECT</label>
-                        </div>
-                        <div class="col-md-6 col-sm-12 mt-1 d-flex justify-content-start gap-2 align-items-center">
-                            <div class="box wrong">&nbsp;</div>
-                            <label for="">WRONG</label>
-                        </div>
-                        <div class="col-md-6 col-sm-12 mt-1 d-flex justify-content-start gap-2 align-items-center">
-                            <div class="box for-review">&nbsp;</div>
-                            <label for="">FOR REVIEW</label>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-xl-8 col-md-7 col-sm-12 px-3 pt-2">
+                <div class="col-12 px-3 pt-2">
                     <div class="content numbers row h-100">
-                        <div class="col-12">
+                        <!-- <div class="col-12">
                             <h5>QUESTIONS</h5>
-                        </div>
-                        <div class="col-12">
+                        </div> -->
+                        <div class="col-12 pt-2">
                             <div class="numbers d-flex justify-content-start align-items-center gap-1">
                                 <div class="number active">1</div>
                                 <div class="number correct">2</div>
@@ -175,32 +159,78 @@
                         </div>
                     </div>
                 </div>
+                <div class="col-12 pt-3">
+                    <div class="d-flex justify-content-start align-items-center gap-2 flex-wrap">
+                        <div class="d-flex justify-content-start gap-2 align-items-center">
+                            <div class="box todo">&nbsp;</div>
+                            <label for="">UNANSWERED</label>
+                        </div>
+                        <div class="d-flex justify-content-start gap-2 align-items-center">
+                            <div class="box active">&nbsp;</div>
+                            <label for="">ANSWERED</label>
+                        </div>
+                        <div class="d-flex justify-content-start gap-2 align-items-center">
+                            <div class="box correct">&nbsp;</div>
+                            <label for="">CORRECT</label>
+                        </div>
+                        <div class="d-flex justify-content-start gap-2 align-items-center">
+                            <div class="box wrong">&nbsp;</div>
+                            <label for="">INCORRECT</label>
+                        </div>
+                        <div class="d-flex justify-content-start gap-2 align-items-center">
+                            <div class="box for-review">&nbsp;</div>
+                            <label for="">FOR REVIEW</label>
+                        </div>
+                    </div>
+                </div>
             </div>
         </section>
         <section class="section-questions mt-3">
-            <div class="content questions row">
-                <div class="col-12">
+            <div class="questions row">
+                <div class="content col-12">
                     <p class="question">1. Lorem ipsum dolor, sit amet consectetur adipisicing elit. Harum ex enim, delectus sunt ipsam sint deleniti! Amet non repellat, necessitatibus, facilis iusto deleniti sed rerum, odio quae officiis ad vero? <b>Choose 2 anwers.</b></p>
                     <hr>
                     <div class="options">
                         <div class="option d-flex align-items-center justify-content-start">
-                            <label for=""><input type="checkbox" name="option" id="option1"><span class="px-2">A. Option 1</span></label>
+                            <label for=""><input type="checkbox" class="option" name="option" id="option1" checked><span class="px-2 answer">A. Option 1</span></label>
                         </div>
                         <div class="option d-flex align-items-center justify-content-start">
-                            <label for=""><input type="checkbox" name="option" id="option2"><span class="px-2">B. Option 2</span></label>
+                            <label for=""><input type="checkbox" class="option" name="option" id="option2"><span class="px-2">B. Option 2</span></label>
                         </div>
                         <div class="option d-flex align-items-center justify-content-start">
-                            <label for=""><input type="checkbox" name="option" id="option3"><span class="px-2">C. Option 3</span></label>
+                            <label for=""><input type="checkbox" class="option" name="option" id="option3"><span class="px-2">C. Option 3</span></label>
                         </div>
                         <div class="option d-flex align-items-center justify-content-start">
-                            <label for=""><input type="checkbox" name="option" id="option4"><span class="px-2">D. Option 4</span></label>
+                            <label for=""><input type="checkbox" class="option" name="option" id="option4"><span class="px-2">D. Option 4</span></label>
+                        </div>
+                    </div>
+                    <div class="remarks">
+                        <hr>
+                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Sed a quis provident asperiores voluptas hic quisquam fugit modi nesciunt tempora aliquid voluptate nulla voluptatum pariatur unde, animi impedit atque natus.</p>
+                    </div>
+                </div>
+                <div class="content col-12">
+                    <p class="question">1. Lorem ipsum dolor, sit amet consectetur adipisicing elit. Harum ex enim, delectus sunt ipsam sint deleniti! Amet non repellat, necessitatibus, facilis iusto deleniti sed rerum, odio quae officiis ad vero? <b>Choose 2 anwers.</b></p>
+                    <hr>
+                    <div class="options">
+                        <div class="option d-flex align-items-center justify-content-start">
+                            <label for=""><input type="radio" class="option" name="option" id="option1"><span class="px-2">A. Option 1</span></label>
+                        </div>
+                        <div class="option d-flex align-items-center justify-content-start">
+                            <label for=""><input type="radio" class="option" name="option" id="option2"><span class="px-2">B. Option 2</span></label>
+                        </div>
+                        <div class="option d-flex align-items-center justify-content-start">
+                            <label for=""><input type="radio" class="option" name="option" id="option3"><span class="px-2">C. Option 3</span></label>
+                        </div>
+                        <div class="option d-flex align-items-center justify-content-start">
+                            <label for=""><input type="radio" class="option" name="option" id="option4"><span class="px-2">D. Option 4</span></label>
                         </div>
                     </div>
                 </div>
             </div>
         </section>
         <section class="section-buttons">
-            <div class="row mt-3">
+            <div class="row my-3">
                 <div class="col-12 text-end">
                     <button class="btn btn-warning">MARK AS FOR REVIEW</button>
                     <button class="btn btn-primary">PREVIOUS</button>

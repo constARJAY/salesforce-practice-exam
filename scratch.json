@@ -1,0 +1,63 @@
+{
+    "questions": [
+      {
+        "id": 116,
+        "question": "How does data quality affect the reliability of AI-driven decisions?",
+        "choices": [
+          { "id": "a", "value": "A combination of low-quality and high-quality data can enhance the accuracy and dependability of AI-driven decisions." },
+          { "id": "b", "value": "Low-quality data decreases the likelihood of model overfitting, enhancing the reliability of predictions." },
+          { "id": "c", "value": "High-quality data enhances the dependability and credibility of AI decisions, building trust among others." }
+        ]
+      },
+      {
+        "id": 117,
+        "question": "Why is the use of good data crucial for effective AI development?",
+        "choices": [
+          { "id": "a", "value": "Guarantees a shorter model training duration." },
+          { "id": "b", "value": "Results in more precise and dependable predictions and outcomes." },
+          { "id": "c", "value": "Diminishes the necessity for post-launch implementation monitoring." }
+        ]
+      },
+      {
+        "id": 118,
+        "question": "A sales manager aims to improve the quality of lead data in their CRM system. What is the most likely process to assist the team in achieving this objective?",
+        "choices": [
+          { "id": "a", "value": "Redesign the lead conversion process." },
+          { "id": "b", "value": "Review and update missing lead information." },
+          { "id": "c", "value": "Prioritize active leads quarterly." }
+        ]
+      },
+      {
+        "id": 119,
+        "question": "A Cloudy Computing administrator wishes to capture a customer's preferred name on their record. Which Salesforce field type is most suitable for this purpose?",
+        "choices": [
+          { "id": "a", "value": "Multi-Select Picklist" },
+          { "id": "b", "value": "Text" },
+          { "id": "c", "value": "Rich Text Area" }
+        ]
+      }
+    ],
+    "answers": [
+      {
+        "id": 116,
+        "value": "c",
+        "explanation": "High-quality data ensures that AI-driven decisions are reliable, building trust in AI systems."
+      },
+      {
+        "id": 117,
+        "value": "b",
+        "explanation": "Good data leads to precise and reliable AI predictions, enhancing decision-making accuracy."
+      },
+      {
+        "id": 118,
+        "value": "b",
+        "explanation": "Reviewing and updating missing lead information improves data quality and CRM efficiency."
+      },
+      {
+        "id": 119,
+        "value": "b",
+        "explanation": "A Text field is the most suitable choice for capturing a customer's preferred name in Salesforce."
+      }
+    ]
+  }
+  

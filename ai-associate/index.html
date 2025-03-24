@@ -88,20 +88,22 @@
             font-weight: bold;
         }
         input.choice {
+            /* 
             height: 15px;
             width: 20px;
+            */
         }
         .bg-wrong {
             background-color: var(--number-wrong);
-            padding: 2px;
+            /* padding: 2px; */
         }
         .bg-correct {
             background-color: var(--number-correct);
-            padding: 2px;
+            /* padding: 2px; */
         }
         .bg-for-review {
             background-color: var(--number-for-review);
-            padding: 2px;
+            /* padding: 2px; */
         }
         .explanation {
             font-style: italic;
@@ -113,30 +115,60 @@
             font-size: 1.2rem;
             font-weight: bold;
         }
+        .form-check-input:disabled~.form-check-label, .form-check-input[disabled]~.form-check-label {
+            opacity: .8 !important;
+        }
     </style>
 </head>
 <body>
     <main class="container mt-4 px-5">
         <section class="title-timer">
-            <div class="d-flex justify-content-between align-items-center" style="font-weight: bold; font-size: 1.8rem;">
-                <div class="title text-uppercase">Salesforce AI Associate - Practice Exam</div>
+            <div class="d-flex justify-content-between align-items-center" style="font-weight: bold;">
+                <div class="title text-uppercase">
+                    <h2 class="mb-0">Salesforce AI Associate</h2>
+                    <small class="text-muted">Practice Exam</small>
+                </div>
             </div>
         </section>
         <hr>
         <section class="instructions" id="section-instructions">
-            <div class="">
+            <div class="mb-3">
                 <h5 class="font-weight-bold mb-0">Instructions:</h5>
                 <span>Please answer the following questions to the best of your ability.</span>
             </div>
-            <div>
-                <h5 class="font-weight-bold mb-0">Time Limit:</h5>
-                <span>90 minutes</span>
-            </div>
-            <div>
+            <div class="mb-3">
                 <h5 class="font-weight-bold mb-0">Number of Questions:</h5>
-                <span>70</span>
+                <div class="btn-group mt-2">
+                    <input type="radio" class="btn-check" name="number-of-question" id="question-number-30" value="30" autocomplete="off" checked>
+                    <label class="btn btn-outline-secondary" for="question-number-30">30</label>
+
+                    <input type="radio" class="btn-check" name="number-of-question" id="question-number-60" value="60" autocomplete="off">
+                    <label class="btn btn-outline-secondary" for="question-number-60">60</label>
+
+                    <input type="radio" class="btn-check" name="number-of-question" id="question-number-90" value="90" autocomplete="off">
+                    <label class="btn btn-outline-secondary" for="question-number-90">90</label>
+
+                    <input type="radio" class="btn-check" name="number-of-question" id="question-number-all" value="ALL" autocomplete="off">
+                    <label class="btn btn-outline-secondary" for="question-number-all">ALL</label>
+                </div>
             </div>
-            <div>
+            <div class="mb-3">
+                <h5 class="font-weight-bold mb-0">Time Limit:</h5>
+                <div class="btn-group mt-2">
+                    <input type="radio" class="btn-check" name="time-limit" id="time-limit-20" value="20" autocomplete="off">
+                    <label class="btn btn-outline-secondary" for="time-limit-20">20</label>
+
+                    <input type="radio" class="btn-check" name="time-limit" id="time-limit-30" value="30" autocomplete="off" checked>
+                    <label class="btn btn-outline-secondary" for="time-limit-30">30</label>
+
+                    <input type="radio" class="btn-check" name="time-limit" id="time-limit-60" value="60" autocomplete="off">
+                    <label class="btn btn-outline-secondary" for="time-limit-60">60</label>
+
+                    <input type="radio" class="btn-check" name="time-limit" id="time-limit-90" value="90" autocomplete="off">
+                    <label class="btn btn-outline-secondary" for="time-limit-90">90</label>
+                </div>
+            </div>
+            <div class="mb-3">
                 <h5 class="font-weight-bold mb-0">Passing Score:</h5>
                 <span>70%</span>
             </div>
@@ -180,13 +212,14 @@
             </div>
         </section>
         <section class="section-questions mt-3 d-none" id="section-questions">
-            <div class="result" id="exam-result-header">
-                <div class="d-flex justify-content-between align-items-center">
-                    <button class="btn btn-secondary" id="btn-review">MARK AS FOR REVIEW</button>
-                    <div id="time">00:00:00</div>
-                </div>
-            </div>
+            <div class="result" id="exam-result-header"></div>
             <div class="questions row" id="questions">
+                <div class="review-timer col-12" id="review-timer">
+                    <div class="d-flex justify-content-between align-items-center">
+                        <button class="btn btn-secondary" id="btn-review">MARK AS FOR REVIEW</button>
+                        <div id="time">00:00:00</div>
+                    </div>
+                </div>
                 <div class="content col-12">
                     <p class="question">1. Lorem ipsum dolor, sit amet consectetur adipisicing elit. Harum ex enim, delectus sunt ipsam sint deleniti! Amet non repellat, necessitatibus, facilis iusto deleniti sed rerum, odio quae officiis ad vero? <b>Choose 2 anwers.</b></p>
                     <hr>
@@ -228,7 +261,7 @@
                 </div>
             </div>
             <div class="progress my-2">
-                <div class="progress-bar" role="progressbar" style="width: 25%; background-color: gray;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100" id="progress-bar"></div>
+                <div class="progress-bar" role="progressbar" style="width: 25%; background-color: #198754;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100" id="progress-bar"></div>
             </div>
             <div class="result" id="exam-result-footer"></div>
         </section>
@@ -237,9 +270,10 @@
 
 
     <script>
-        const QUESTION_LIMIT = 70;
         const PASSING_SCORE_PERCENTAGE = 70;
-        const TIME_LIMIT = 1.5;
+        let QUESTION_LIMIT = 70;
+        let MAX_QUESTION = 119;
+        let TIME_LIMIT = 90; // in minutes
         let TIME_USED_DISPLAY = '00:00:00';
         let QUESTION_LIST = [];
         let ANSWER_LIST = [];
@@ -276,11 +310,13 @@
         function displayButtons(isRetake = false) {
             let html = `
             <div class="row my-3">
-                <div class="col-12 d-flex justify-content-between align-items-center">
+                <div class="col-md-6 col-sm-12 py-2 d-flex justify-content-start align-items-center">
                     <div class="d-flex justify-content-end align-items-center gap-1">
                         <button class="btn btn-outline-primary" id="btn-previous" disabled>PREVIOUS</button>
                         <button class="btn btn-primary" id="btn-next">NEXT</button>
                     </div>
+                </div>
+                <div class="col-md-6 col-sm-12 py-2 d-flex justify-content-end align-items-center">
                     <div class="d-flex justify-content-end align-items-center gap-1">
                         <button class="btn btn-warning" id="btn-check">CHECK</button>
                         <button class="btn btn-success" id="btn-submit">SUBMIT</button>
@@ -297,7 +333,6 @@
                 </div>`;
             }
 
-
             $("#section-buttons").html(html);
         }
 
@@ -308,7 +343,13 @@
             let questions = QUESTION_LIST || [];
 
             let randomQuestions = questions.sort(() => Math.random() - 0.5).slice(0, QUESTION_LIMIT);
-            let html = '';
+            let html = `
+            <div class="review-timer col-12" id="review-timer">
+                <div class="d-flex justify-content-between align-items-center">
+                    <button class="btn btn-secondary" id="btn-review">MARK AS FOR REVIEW</button>
+                    <div id="time" class="font-weight-bold">00:00:00</div>
+                </div>
+            </div>`;
 
             for (let i = 0; i < randomQuestions.length; i++) {
                 let { id, question, choices } = randomQuestions[i];
@@ -319,9 +360,9 @@
                 choices.forEach((choice, index) => {
                     let { id: choiceId, value: choiceValue } = choice;
                     choicesHTML += `
-                    <div class="parent-choice d-flex align-items-center justify-content-start" id="parent-choice${id + choiceId}" question-id="${id}">
-                        <label for="">
-                            <input type="radio" class="choice" question-id="${id}" name="choice${id}" id="choice${id + choiceId}" value="${choiceId}" question-number="${questionNumber}">
+                    <div class="parent-choice form-check" id="parent-choice${id + choiceId}" question-id="${id}">
+                        <input type="radio" class="choice form-check-input" question-id="${id}" name="choice${id}" id="choice${id + choiceId}" value="${choiceId}" question-number="${questionNumber}">
+                        <label class="form-check-label" for="choice${id + choiceId}">
                             <span class="px-2">${choiceValue}</span>
                         </label>
                     </div>`;
@@ -444,6 +485,9 @@
                 let remarks = `<hr><p class="explanation"> <b>${status}</b> ${explanation}</p>`;
                 $(`#question-content${questionNumber} .remarks`).html(remarks);
 
+                // disable all choices
+                $(`[name="choice${questionId}"]`).attr("disabled", true);
+
                 updateProgressBar();
                 return isCorrect;
             }
@@ -462,6 +506,13 @@
                 } else {
                     $('#btn-next').attr("disabled", false);
                 }
+
+                let isCurrentForReview = $(`.question-number[number=${currentQuestionNumber}]`).attr('for-review');
+                if (isCurrentForReview == 'true') {
+                    $('#btn-review').text('UNMARK AS FOR REVIEW');
+                } else {
+                    $('#btn-review').text('MARK AS FOR REVIEW');
+                }
             }
             updatePrevNextButton();
 
@@ -476,27 +527,34 @@
 
             function timer() {
                 if (STARTED_EXAM) {
-                    let time = 0;
                     let timeLimit = TIME_LIMIT * 60; // in seconds
+                    let timeUsed = 0;
                     let interval = setInterval(() => {
                         if (FINISHED_EXAM) return clearInterval(interval);
 
-                        let hours = Math.floor(time / 3600);
-                        let minutes = Math.floor(time / 60);
-                        let seconds = time % 60;
+                        let hours = Math.floor(timeLimit / 3600);
+                        let minutes = Math.floor(timeLimit / 60);
+                        let seconds = timeLimit % 60;
 
                         hours = hours < 10 ? "0" + hours : hours;
                         minutes = minutes < 10 ? "0" + minutes : minutes;
                         seconds = seconds < 10 ? "0" + seconds : seconds;
 
-                        let lastMinute = timeLimit - time <= 60;
+                        let lastMinute = timeLimit <= 60;
                         let timeDisplay = `${hours}:${minutes}:${seconds}`;
                             timeDisplay = lastMinute ? `<span class="text-danger" style="font-size: 1.5rem;">${timeDisplay}</span>` : timeDisplay;
-                        TIME_USED_DISPLAY = timeDisplay;
+
+                        let usedHours = Math.floor(timeUsed / 3600);
+                        let usedMinutes = Math.floor(timeUsed / 60);
+                        let usedSeconds = timeUsed % 60;
+                        usedHours = usedHours < 10 ? "0" + usedHours : usedHours;
+                        usedMinutes = usedMinutes < 10 ? "0" + usedMinutes : usedMinutes;
+                        usedSeconds = usedSeconds < 10 ? "0" + usedSeconds : usedSeconds;
+                        TIME_USED_DISPLAY = `${usedHours}:${usedMinutes}:${usedSeconds}`;
 
                         $('#time').html(timeDisplay);
 
-                        if (time == timeLimit) {
+                        if (timeLimit < 1) {
                             $('#time').text("00:00:00");
 
                             Swal.fire({
@@ -511,7 +569,8 @@
                             })
                         }
 
-                        time += 1;
+                        timeLimit -= 1;
+                        timeUsed += 1;
                     }, 1000);
                 }
                 else {
@@ -522,6 +581,16 @@
             function startExam() {
                 STARTED_EXAM = true;
                 $('#btn-start, #btn-retake').text('PLEASE WAIT...').attr("disabled", true);
+
+                let questionNumber = $(`[name="number-of-question"]:checked`).val();
+                    questionNumber = questionNumber == "ALL" ? MAX_QUESTION : questionNumber;
+                    questionNumber = Number(questionNumber);
+                let timeLimit = $(`[name="time-limit"]:checked`).val();
+                    timeLimit = Number(timeLimit);
+                // alert(`You have ${timeLimit} minutes to complete ${questionNumber} questions.`);
+
+                QUESTION_LIMIT = questionNumber;
+                TIME_LIMIT = timeLimit;
 
                 setTimeout(() => {
                     $('#section-instructions').addClass("d-none");
@@ -578,10 +647,12 @@
 
                 $('.question-number').removeClass("active").removeClass('for-review');
                 $('.question-content').removeClass("d-none").addClass("d-block");
+                $('#review-timer').removeClass("d-block").addClass("d-none");
                 updateProgressBar();
                 displayButtons(true);
 
                 FINISHED_EXAM = true;
+                STARTED_EXAM = false;
             }
 
             // Start exam
@@ -626,7 +697,14 @@
             // Mark for review
             $(document).on("click", "#btn-review", function() {
                 let currentQuestionNumber = $('.question-number.current').attr("number");
-                $(`.question-number[number=${currentQuestionNumber}]`).addClass("for-review");
+                let reviewed = $(`.question-number[number=${currentQuestionNumber}]`).attr('for-review');
+                if (reviewed == 'true') {
+                    $(`.question-number[number=${currentQuestionNumber}]`).removeClass("for-review").attr('for-review', 'false');
+                }
+                else {
+                    $(`.question-number[number=${currentQuestionNumber}]`).addClass("for-review").attr('for-review', 'true');
+                }
+                updatePrevNextButton();
             })
 
             // Next question
@@ -675,6 +753,7 @@
 
             // Retake
             $(document).on("click", "#btn-retake", function() {
+                FINISHED_EXAM = false;
                 startExam();
             });
         })
